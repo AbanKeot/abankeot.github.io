@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aban Keot — Financial Analyst Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,500&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#14213B;
+    --ink-soft:#5B6472;
+    --paper:#F5F6F8;
+    --paper-raised:#FFFFFF;
+    --line:#D8DCE3;
+    --buy:#1F7A5C;
+    --buy-bg:#E4F1EC;
+    --sell:#B23A3A;
+    --sell-bg:#F7E8E8;
+    --gold:#9C7A17;
+    --gold-bg:#F3ECD6;
+    --serif: "Source Serif 4", Georgia, serif;
+    --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+    --sans: "IBM Plex Sans", -apple-system, sans-serif;
+    --maxw: 1040px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--sans);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  ::selection{background:var(--gold-bg); color:var(--ink);}
+
+  /* ---------- ticker tape ---------- */
+  .ticker{
+    background:var(--ink);
+    color:#EDEFF3;
+    overflow:hidden;
+    white-space:nowrap;
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:.08em;
+    border-bottom:1px solid #0B1226;
+  }
+  .ticker__track{
+    display:inline-block;
+    padding-left:100%;
+    animation:ticker 38s linear infinite;
+  }
+  .ticker span{padding:6px 28px; display:inline-block;}
+  .ticker .up{color:#7FCBA4;}
+  @keyframes ticker{
+    0%{transform:translateX(0);}
+    100%{transform:translateX(-100%);}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .ticker__track{animation:none; padding-left:16px;}
+  }
+
+  /* ---------- nav ---------- */
+  nav{
+    position:sticky; top:0; z-index:40;
+    background:rgba(245,246,248,.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    max-width:var(--maxw); margin:0 auto; padding:14px 24px;
+    display:flex; align-items:center; justify-content:space-between; gap:16px;
+  }
+  .brand{
+    font-family:var(--mono); font-weight:600; font-size:14px;
+    display:flex; align-items:center; gap:8px;
+  }
+  .brand .dot{width:7px;height:7px;border-radius:50%;background:var(--buy);display:inline-block;}
+  .nav-links{display:flex; gap:22px; list-style:none; margin:0; padding:0; font-size:13px; font-family:var(--mono);}
+  .nav-links li{margin-right:22px;}
+  .nav-links li:last-child{margin-right:0;}
+  .nav-links a{text-decoration:none; color:var(--ink-soft); transition:color .15s;}
+  .nav-links a:hover, .nav-links a:focus-visible{color:var(--ink);}
+  .btn{
+    font-family:var(--mono); font-size:12.5px; letter-spacing:.03em;
+    padding:9px 16px; border-radius:2px; text-decoration:none;
+    border:1px solid var(--ink); color:var(--ink); white-space:nowrap;
+    transition:background .15s, color .15s;
+  }
+  .btn:hover, .btn:focus-visible{background:var(--ink); color:#fff;}
+  .btn--solid{background:var(--ink); color:#fff;}
+  .btn--solid:hover{background:#0B1226;}
+
+  /* ---------- layout helpers ---------- */
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 24px;}
+  section{padding:64px 0;}
+  .eyebrow{
+    font-family:var(--mono); font-size:12px; letter-spacing:.14em;
+    color:var(--ink-soft); text-transform:uppercase; margin:0 0 10px;
+  }
+  h2.section-title{
+    font-family:var(--serif); font-size:clamp(24px,3vw,30px); font-weight:600;
+    margin:0 0 28px; padding-bottom:14px; border-bottom:1px solid var(--line);
+  }
+
+  /* ---------- hero ---------- */
+  .hero{padding:72px 0 48px; position:relative;}
+  .hero-grid{display:flex; justify-content:space-between; align-items:flex-start; gap:32px; flex-wrap:wrap;}
+  .hero h1{
+    font-family:var(--serif); font-weight:700;
+    font-size:clamp(40px,6vw,64px); line-height:1.02; margin:6px 0 14px; letter-spacing:-.01em;
+  }
+  .hero .role{
+    font-size:16px; color:var(--ink-soft); max-width:560px; margin:0 0 26px;
+  }
+  .meta-strip{
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:0; border:1px solid var(--line); background:var(--paper-raised);
+    margin-bottom:30px;
+  }
+  .meta-cell{padding:14px 18px; border-right:1px solid var(--line);}
+  .meta-cell:last-child{border-right:none;}
+  .meta-cell .k{font-family:var(--mono); font-size:10.5px; letter-spacing:.1em; color:var(--ink-soft); text-transform:uppercase; margin-bottom:4px;}
+  .meta-cell .v{font-size:13.5px; font-weight:500;}
+  .hero-actions{display:flex; gap:12px; flex-wrap:wrap;}
+
+  .stamp{
+    font-family:var(--mono); border:2px solid var(--buy); color:var(--buy);
+    padding:14px 20px; text-align:center; transform:rotate(3deg);
+    background:var(--buy-bg); min-width:150px; flex-shrink:0;
+  }
+  .stamp .r1{font-size:10px; letter-spacing:.12em; opacity:.85;}
+  .stamp .r2{font-size:22px; font-weight:600; margin:4px 0;}
+  .stamp .r3{font-size:9.5px; letter-spacing:.08em; opacity:.75;}
+
+  /* ---------- summary ---------- */
+  .summary-block{
+    display:grid; grid-template-columns:auto 1fr; gap:22px; align-items:start;
+  }
+  .summary-block .mark{font-family:var(--serif); font-size:52px; color:var(--gold); line-height:1; margin-top:-8px;}
+  .summary-block p{font-size:16.5px; max-width:720px; margin:0;}
+
+  /* ---------- skills / coverage universe ---------- */
+  .skills-grid{
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:0;
+    border:1px solid var(--line); border-bottom:none;
+  }
+  .skill-cat{padding:20px 22px; border-bottom:1px solid var(--line); border-right:1px solid var(--line);}
+  .skill-cat:nth-child(even){border-right:none;}
+  @media(max-width:640px){ .skill-cat{border-right:none !important;} }
+  .skill-cat h3{
+    font-family:var(--mono); font-size:12.5px; letter-spacing:.06em; text-transform:uppercase;
+    margin:0 0 10px; color:var(--ink);
+  }
+  .tag-row{display:flex; flex-wrap:wrap; gap:6px;}
+  .tag{
+    font-family:var(--mono); font-size:11.5px; padding:4px 9px; border:1px solid var(--line);
+    border-radius:2px; background:var(--paper-raised); color:var(--ink-soft);
+  }
+
+  /* ---------- research notes / projects ---------- */
+  .notes-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:18px;}
+  .note-card{
+    background:var(--paper-raised); border:1px solid var(--line); padding:22px;
+    display:flex; flex-direction:column; gap:12px;
+  }
+  .note-head{display:flex; justify-content:space-between; align-items:flex-start; gap:10px;}
+  .note-ticker{font-family:var(--mono); font-size:11px; color:var(--ink-soft); letter-spacing:.06em;}
+  .note-title{font-family:var(--serif); font-size:19px; font-weight:600; margin:2px 0 0;}
+  .pill{
+    font-family:var(--mono); font-size:11px; font-weight:600; letter-spacing:.05em;
+    padding:4px 10px; border-radius:2px; white-space:nowrap; flex-shrink:0;
+  }
+  .pill--buy{background:var(--buy-bg); color:var(--buy);}
+  .pill--sell{background:var(--sell-bg); color:var(--sell);}
+  .pill--note{background:var(--gold-bg); color:var(--gold);}
+  .note-stat{
+    font-family:var(--mono); font-size:12.5px; color:var(--ink); background:var(--paper);
+    border:1px dashed var(--line); padding:8px 10px;
+  }
+  .note-card ul{margin:0; padding-left:18px; font-size:13.8px; color:var(--ink); flex-grow:1;}
+  .note-card li{margin-bottom:6px;}
+  .note-link{
+    font-family:var(--mono); font-size:12px; text-decoration:none; color:var(--ink);
+    border-top:1px solid var(--line); padding-top:12px; display:inline-flex; align-items:center; gap:6px;
+  }
+  .note-link:hover{color:var(--buy);}
+
+  /* ---------- experience ledger ---------- */
+  .ledger-row{
+    display:grid; grid-template-columns:140px 1fr; gap:22px;
+    padding:22px 0; border-bottom:1px solid var(--line);
+  }
+  .ledger-row:first-child{border-top:1px solid var(--line);}
+  .ledger-date{font-family:var(--mono); font-size:12.5px; color:var(--ink-soft); padding-top:3px;}
+  .ledger-role{font-family:var(--serif); font-size:18px; font-weight:600; margin:0;}
+  .ledger-org{font-size:13.5px; color:var(--ink-soft); margin:2px 0 10px;}
+  .ledger-role-line{display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:8px;}
+  .ledger-role-line .org-mobile{display:none;}
+  .ledger-row ul{margin:0; padding-left:18px; font-size:14px;}
+  .ledger-row li{margin-bottom:6px;}
+  @media(max-width:600px){
+    .ledger-row{grid-template-columns:1fr;}
+    .ledger-date{padding-top:0;}
+  }
+
+  /* ---------- education / certs ---------- */
+  .two-col{display:grid; grid-template-columns:1.1fr .9fr; gap:40px;}
+  @media(max-width:720px){.two-col{grid-template-columns:1fr;}}
+  .edu-item{margin-bottom:18px;}
+  .edu-item .degree{font-family:var(--serif); font-weight:600; font-size:16.5px;}
+  .edu-item .school{font-size:13.5px; color:var(--ink-soft);}
+  .diss-note{
+    margin-top:6px; padding:10px 12px; background:var(--gold-bg); border-left:3px solid var(--gold);
+    font-size:13px; font-style:italic;
+  }
+  .cert-list{list-style:none; margin:0; padding:0;}
+  .cert-list li{
+    font-size:13.8px; padding:10px 0; border-bottom:1px solid var(--line);
+    display:flex; gap:10px;
+  }
+  .cert-list li:last-child{border-bottom:none;}
+  .cert-list li:before{content:"—"; color:var(--gold); font-family:var(--mono); flex-shrink:0;}
+
+  /* ---------- footer ---------- */
+  footer{
+    border-top:1px solid var(--line); padding:40px 0 60px; margin-top:20px;
+  }
+  .foot-grid{display:flex; justify-content:space-between; align-items:flex-end; gap:24px; flex-wrap:wrap;}
+  .foot-links{display:flex; gap:18px; flex-wrap:wrap; font-family:var(--mono); font-size:12.5px;}
+  .foot-links a{text-decoration:none; border-bottom:1px solid var(--line); padding-bottom:2px; margin-right:18px; display:inline-block;}
+  .foot-links a:last-child{margin-right:0;}
+  .foot-links a:hover{border-color:var(--ink);}
+  .foot-note{font-family:var(--mono); font-size:11px; color:var(--ink-soft);}
+
+  @media(max-width:640px){
+    .nav-links{display:none;}
+    .hero{padding-top:48px;}
+    section{padding:44px 0;}
+  }
+</style>
+</head>
+<body>
+
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker__track">
+      <span>AK <span class="up">▲</span> MBA FINANCE</span>
+      <span>THREE-STATEMENT MODELLING</span>
+      <span>DCF &amp; RELATIVE VALUATION (P/E)</span>
+      <span>FP&amp;A · BUDGETING · VARIANCE ANALYSIS</span>
+      <span>CREDIT RISK &amp; RBI FRAMEWORKS</span>
+      <span>PRIMARY RESEARCH · 21-RETAILER FIELD STUDY</span>
+      <span>ADVANCED EXCEL · SQL (BASIC)</span>
+      <span>AK <span class="up">▲</span> MBA FINANCE</span>
+      <span>THREE-STATEMENT MODELLING</span>
+      <span>DCF &amp; RELATIVE VALUATION (P/E)</span>
+      <span>FP&amp;A · BUDGETING · VARIANCE ANALYSIS</span>
+      <span>CREDIT RISK &amp; RBI FRAMEWORKS</span>
+      <span>PRIMARY RESEARCH · 21-RETAILER FIELD STUDY</span>
+      <span>ADVANCED EXCEL · SQL (BASIC)</span>
+    </div>
+  </div>
+
+  <nav>
+    <div class="nav-inner">
+      <div class="brand"><span class="dot"></span> ABAN KEOT</div>
+      <ul class="nav-links">
+        <li><a href="#summary">Summary</a></li>
+        <li><a href="#coverage">Coverage</a></li>
+        <li><a href="#notes">Research Notes</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#education">Education</a></li>
+      </ul>
+      <a class="btn btn--solid" href="Aban_Keot_Resume.pdf" download>Download Résumé</a>
+    </div>
+  </nav>
+
+  <header class="hero wrap">
+    <div class="eyebrow">Equity &amp; Credit Research — Coverage Note</div>
+    <div class="hero-grid">
+      <div style="flex:1; min-width:280px;">
+        <h1>Aban Keot</h1>
+        <p class="role">MBA Finance graduate specialising in financial modelling, relative valuation, and FP&amp;A — building three-statement models, DCF &amp; P/E valuations, and primary research studies for real organisations.</p>
+      </div>
+      <div class="stamp" role="img" aria-label="Rating stamp: Buy, high analyst confidence">
+        <div class="r1">RATING</div>
+        <div class="r2">BUY</div>
+        <div class="r3">ANALYST CONFIDENCE: HIGH</div>
+      </div>
+    </div>
+
+    <div class="meta-strip">
+      <div class="meta-cell">
+        <div class="k">Sector Focus</div>
+        <div class="v">Equity Research · FP&amp;A · Valuation</div>
+      </div>
+      <div class="meta-cell">
+        <div class="k">Based</div>
+        <div class="v">Guwahati, Assam, India</div>
+      </div>
+      <div class="meta-cell">
+        <div class="k">Status</div>
+        <div class="v">Actively seeking opportunities</div>
+      </div>
+      <div class="meta-cell">
+        <div class="k">Contact</div>
+        <div class="v">abankeot77@gmail.com</div>
+      </div>
+    </div>
+
+    <div class="hero-actions">
+      <a class="btn btn--solid" href="Aban_Keot_Resume.pdf" download>Download Résumé (PDF)</a>
+      <a class="btn" href="https://drive.google.com/drive/folders/1Kep0WM9U-vgBh3-cDHvAdyjOTsCCIujs?usp=sharing" target="_blank" rel="noopener">Full Project Portfolio ↗</a>
+      <a class="btn" href="https://www.linkedin.com/in/abankeot7/" target="_blank" rel="noopener">LinkedIn ↗</a>
+    </div>
+  </header>
+
+  <main class="wrap">
+
+    <section id="summary">
+      <h2 class="section-title">Summary</h2>
+      <div class="summary-block">
+        <div class="mark">&ldquo;</div>
+        <p>MBA Finance graduate with hands-on experience in financial modelling, relative valuation, and FP&amp;A — including budgeting, variance analysis, and cash flow monitoring — built through independent equity and banking research projects alongside applied finance operations experience. Skilled in three-statement modelling, forecasting, and P/E multiple-based valuation, with practical grounding in financial statement analysis, RBI regulatory frameworks, and credit risk drivers. Also brings primary research experience — designing surveys, collecting and analysing field data, and delivering findings to business stakeholders. Seeking to apply valuation, FP&amp;A, and modelling skills in a Portfolio Valuation, FP&amp;A, Equity Research, or Financial Analyst role.</p>
+      </div>
+    </section>
+
+    <section id="coverage">
+      <h2 class="section-title">Coverage Universe — Skills</h2>
+      <div class="skills-grid">
+        <div class="skill-cat">
+          <h3>Financial Analysis</h3>
+          <div class="tag-row">
+            <span class="tag">Financial Statement Analysis</span>
+            <span class="tag">Credit Risk Assessment</span>
+            <span class="tag">Equity &amp; Credit Research</span>
+            <span class="tag">Ratio Analysis (FOIR)</span>
+            <span class="tag">Relative Valuation (P/E)</span>
+            <span class="tag">Industry &amp; Macro Analysis</span>
+            <span class="tag">NPA &amp; Exposure Monitoring</span>
+          </div>
+        </div>
+        <div class="skill-cat">
+          <h3>Financial Modelling</h3>
+          <div class="tag-row">
+            <span class="tag">Three-Statement Modelling</span>
+            <span class="tag">Target P/E Valuation</span>
+            <span class="tag">Total Return Approach</span>
+            <span class="tag">Forecasting</span>
+            <span class="tag">Scenario &amp; Variance Analysis</span>
+          </div>
+        </div>
+        <div class="skill-cat">
+          <h3>FP&amp;A &amp; Reporting</h3>
+          <div class="tag-row">
+            <span class="tag">Budgeting</span>
+            <span class="tag">Cash Flow Monitoring</span>
+            <span class="tag">MIS &amp; Mgmt Reporting</span>
+            <span class="tag">Pricing Analysis</span>
+            <span class="tag">Expense &amp; Vendor Tracking</span>
+          </div>
+        </div>
+        <div class="skill-cat">
+          <h3>Banking &amp; Compliance</h3>
+          <div class="tag-row">
+            <span class="tag">Banking Ratio Analysis</span>
+            <span class="tag">RBI Regulatory Framework</span>
+            <span class="tag">Loan Lifecycle Monitoring</span>
+            <span class="tag">Capital Markets</span>
+          </div>
+        </div>
+        <div class="skill-cat">
+          <h3>Research &amp; Analytics</h3>
+          <div class="tag-row">
+            <span class="tag">Primary Survey Design</span>
+            <span class="tag">Structured Questionnaires</span>
+            <span class="tag">Percentage &amp; Mean-Score Analysis</span>
+            <span class="tag">Business Recommendations</span>
+          </div>
+        </div>
+        <div class="skill-cat">
+          <h3>Tools</h3>
+          <div class="tag-row">
+            <span class="tag">Advanced Excel</span>
+            <span class="tag">XLOOKUP / INDEX-MATCH</span>
+            <span class="tag">Pivot Tables · SUMIFS</span>
+            <span class="tag">SQL (basic)</span>
+            <span class="tag">Screener.in · Tickertape</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="notes">
+      <h2 class="section-title">Research Notes — Projects</h2>
+      <div class="notes-grid">
+
+        <article class="note-card">
+          <div class="note-head">
+            <div>
+              <div class="note-ticker">NSE: ITC — INDEPENDENT PROJECT</div>
+              <div class="note-title">ITC Limited — Equity Research, DCF &amp; Valuation</div>
+            </div>
+            <span class="pill pill--sell">SELL</span>
+          </div>
+          <div class="note-stat">Basis: target P/E on forward EPS · total expected return (price + dividend)</div>
+          <ul>
+            <li>Industry &amp; business analysis: competitive positioning, growth drivers, key risks.</li>
+            <li>Independently built an integrated 5-year model (P&amp;L, balance sheet, cash flow) forecasting revenue, EBITDA, margins and working capital under multiple assumptions.</li>
+            <li>Derived a target price and issued a SELL call on a total expected return basis.</li>
+          </ul>
+        </article>
+
+        <article class="note-card">
+          <div class="note-head">
+            <div>
+              <div class="note-ticker">NSE: SBIN — INDEPENDENT PROJECT</div>
+              <div class="note-title">State Bank of India — Banking Model &amp; Valuation</div>
+            </div>
+            <span class="pill pill--buy">BUY</span>
+          </div>
+          <div class="note-stat">81% total expected return · sector-typical P/E vs. PSU bank range</div>
+          <ul>
+            <li>Five-year banking model: loan growth, NIM, cost-to-income, and asset quality (GNPA, credit cost) grounded in RBI trends.</li>
+            <li>Applied a benchmarked P/E multiple to forward EPS to derive a target price.</li>
+            <li>Issued a BUY call based on an 81% total expected return.</li>
+          </ul>
+        </article>
+
+        <article class="note-card">
+          <div class="note-head">
+            <div>
+              <div class="note-ticker">NSE: HAL — INDEPENDENT PROJECT</div>
+              <div class="note-title">Hindustan Aeronautics — Sector &amp; Financial Analysis</div>
+            </div>
+            <span class="pill pill--note">INDUSTRY NOTE</span>
+          </div>
+          <div class="note-stat">Defence sector deep-dive · order book &amp; competitive mapping</div>
+          <ul>
+            <li>Order book analysis and revenue growth driver mapping.</li>
+            <li>Competitive positioning within India's defence manufacturing sector.</li>
+            <li>Identification of key investment risks.</li>
+          </ul>
+        </article>
+
+        <article class="note-card">
+          <div class="note-head">
+            <div>
+              <div class="note-ticker">USTM — MBA DISSERTATION · JUL–AUG 2025</div>
+              <div class="note-title">Retailers' Perspective on Technology Adoption — A Study with ITC Limited</div>
+            </div>
+            <span class="pill pill--note">FIELD RESEARCH</span>
+          </div>
+          <div class="note-stat">n = 21 retailers, Guwahati · 100% UPI adoption · mean score 4.66/5 for customer-demand-driven adoption</div>
+          <ul>
+            <li>Designed and ran a structured-questionnaire field survey across 21 ITC retail outlets.</li>
+            <li>Analysed adoption drivers, ease-of-business impact, and retailer experience using percentage and mean-score methods.</li>
+            <li>Delivered findings and recommendations to ITC branch management and university faculty.</li>
+          </ul>
+          <a class="note-link" href="Aban_Keot_Dissertation.pdf" target="_blank" rel="noopener">Read full dissertation (PDF) →</a>
+        </article>
+
+      </div>
+    </section>
+
+    <section id="experience">
+      <h2 class="section-title">Professional Experience</h2>
+
+      <div class="ledger-row">
+        <div class="ledger-date">MAR 2023 —<br>JAN 2025</div>
+        <div>
+          <div class="ledger-role-line">
+            <p class="ledger-role">Assistant Finance Officer (FP&amp;A &amp; Operations)</p>
+          </div>
+          <div class="ledger-org">XOMOY Innovatives Pvt Ltd · Remote</div>
+          <ul>
+            <li>Prepared monthly MIS reports, financial summaries, and dashboards for management decision-making.</li>
+            <li>Assisted in budgeting, expense planning, and variance analysis for operations, campaigns, and live events.</li>
+            <li>Built Excel reports and pricing analyses using Pivot Tables, XLOOKUP, SUMIFS, and INDEX-MATCH.</li>
+            <li>Supported cost analysis on licensing/royalty expenses and tracked ticket sales for the company's Baahi platforms.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="ledger-row">
+        <div class="ledger-date">JUL 2022 —<br>JAN 2023</div>
+        <div>
+          <p class="ledger-role">Operations &amp; MIS Executive</p>
+          <div class="ledger-org">HDFC Home Loan Agency</div>
+          <ul>
+            <li>Managed post-disbursement monitoring for 50+ home loan cases weekly, leading a team of 5 field executives.</li>
+            <li>Reviewed construction progress, inspection reports, and property documents ahead of HDFC portal submission.</li>
+            <li>Prepared daily MIS and monthly billing reports, enabling consistent first-day-of-month submission.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="ledger-row">
+        <div class="ledger-date">JUL 2025 —<br>AUG 2025</div>
+        <div>
+          <p class="ledger-role">Trade Marketing &amp; Distribution — Summer Intern</p>
+          <div class="ledger-org">ITC Limited (FMCG Division)</div>
+          <ul>
+            <li>Tracked daily secondary sales trends across 16 retail outlets, flagging distribution gaps and stock issues.</li>
+            <li>Designed and ran a 21-retailer primary research study on technology adoption; presented findings to branch management (see Field Research note above).</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="education">
+      <h2 class="section-title">Education &amp; Certifications</h2>
+      <div class="two-col">
+        <div>
+          <div class="edu-item">
+            <div class="degree">MBA (Finance)</div>
+            <div class="school">University of Science &amp; Technology Meghalaya · Jun 2024 – Jun 2026</div>
+            <div class="diss-note">Dissertation: &ldquo;Retailers' Perspective on Use of Technology for Growth of Business — A Study with ITC Limited, Guwahati, Assam.&rdquo;</div>
+          </div>
+          <div class="edu-item">
+            <div class="degree">B.Com</div>
+            <div class="school">Darrang College, Gauhati University · 2017 – 2020</div>
+          </div>
+          <div class="edu-item">
+            <div class="degree">PGDCA</div>
+            <div class="school">Bidya Sarathi Educational Institute · 2021 – 2022</div>
+          </div>
+        </div>
+        <div>
+          <ul class="cert-list">
+            <li>Bank Credit Analysis and Portfolio Management — EDUCBA (Coursera)</li>
+            <li>DCF Valuation Modeling Fundamentals — Corporate Finance Institute</li>
+            <li>GST Certification — IIM Bangalore (SWAYAM / NTA), Score: 84.2%</li>
+            <li>JPMorgan Chase Commercial Banking Virtual Experience — Forage</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="brand" style="margin-bottom:10px;"><span class="dot"></span> ABAN KEOT</div>
+        <div class="foot-links">
+          <a href="mailto:abankeot77@gmail.com">abankeot77@gmail.com</a>
+          <a href="tel:+919101630124">+91 91016 30124</a>
+          <a href="https://www.linkedin.com/in/abankeot7/" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://drive.google.com/drive/folders/1Kep0WM9U-vgBh3-cDHvAdyjOTsCCIujs?usp=sharing" target="_blank" rel="noopener">Project Portfolio</a>
+          <a href="Aban_Keot_Resume.pdf" download>Résumé (PDF)</a>
+        </div>
+      </div>
+      <div class="foot-note">Guwahati, Assam, India · Prepared Aug 2026</div>
+    </div>
+  </footer>
+
+</body>
+</html>
