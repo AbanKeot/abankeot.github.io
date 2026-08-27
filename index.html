@@ -185,11 +185,20 @@
   }
   .note-card ul{margin:0; padding-left:18px; font-size:13.8px; color:var(--ink); flex-grow:1;}
   .note-card li{margin-bottom:6px;}
-  .note-link{
-    font-family:var(--mono); font-size:12px; text-decoration:none; color:var(--ink);
-    border-top:1px solid var(--line); padding-top:12px; display:inline-flex; align-items:center; gap:6px;
-  }
-  .note-link:hover{color:var(--buy);}
+ 
+.note-link{
+    font-family:var(--mono); font-size:12.5px; font-weight:600; letter-spacing:.03em;
+    text-decoration:none; color:#fff; background:var(--ink);
+    padding:10px 16px; border-radius:3px; margin-top:4px;
+    display:inline-flex; align-items:center; gap:8px; justify-content:center;
+    border:1px solid var(--ink);
+    transition:background .15s, transform .15s, box-shadow .15s;
+}
+.note-link:hover, .note-link:focus-visible{
+    background:#0B1226;
+    transform:translateY(-1px);
+    box-shadow:0 4px 10px rgba(20,33,59,.25);
+}
 
   /* ---------- experience ledger ---------- */
   .ledger-row{
@@ -366,7 +375,13 @@
        href="#notes">
        View Projects →
     </a>
-    
+    <a class="btn"
+   href="https://drive.google.com/drive/folders/1Kep0WM9U-vgBh3-cDHvAdyjOTsCCIujs?usp=sharing"
+   target="_blank"
+   rel="noopener"
+   aria-label="Google Drive Portfolio">
+   <i class="fa-brands fa-google-drive"></i> Portfolio
+</a>
 <a class="btn"
    href="https://www.linkedin.com/in/abankeot7/"
    target="_blank"
@@ -548,10 +563,10 @@
 
     <div style="display:flex; gap:14px; flex-wrap:wrap;">
       <a class="note-link"
-         href="ITC%20ltd%20DFC%20Model%20by%20Aban%20keot.xlsx"
-         download>
-        Download DCF Model →
-      </a>
+   href="ITC%20Ltd%20DCF%20Model%20by%20Aban%20keot.xlsx"
+   download>
+  Download DCF Model →
+</a>
 
     </div>
   </article>
