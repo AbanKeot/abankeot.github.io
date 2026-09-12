@@ -266,6 +266,39 @@
     .hero{padding-top:48px;}
     section{padding:44px 0;}
   }
+/* ---------- certifications ---------- */
+.cert-grid{
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:16px;
+}
+.cert-card{
+  background:var(--paper-raised); border:1px solid var(--line); padding:18px 20px;
+  display:flex; flex-direction:column; gap:8px;
+  transition:transform .2s ease, box-shadow .2s ease;
+}
+.cert-card:hover{
+  transform:translateY(-3px);
+  box-shadow:0 12px 20px -10px rgba(20,33,59,.2);
+}
+.cert-card .org{
+  font-family:var(--mono); font-size:11px; letter-spacing:.06em; color:var(--ink-soft); text-transform:uppercase;
+}
+.cert-card .title{
+  font-family:var(--serif); font-size:16.5px; font-weight:600; margin:0;
+}
+.cert-card .date{
+  font-family:var(--mono); font-size:11.5px; color:var(--ink-soft);
+}
+.cert-actions{display:flex; gap:10px; flex-wrap:wrap; margin-top:6px;}
+.cert-actions a{
+  font-family:var(--mono); font-size:11.5px; font-weight:600;
+  padding:7px 12px; border-radius:2px; text-decoration:none;
+  border:1px solid var(--ink); color:var(--ink);
+  transition:background .15s, color .15s;
+}
+.cert-actions a:hover{background:var(--ink); color:#fff;}
+.cert-actions a.primary{background:var(--ink); color:#fff;}
+.cert-actions a.primary:hover{background:#0B1226;}
+  
 </style>
 </head>
 <body>
@@ -310,6 +343,7 @@
         <li><a href="#notes">Research Notes</a></li>
         <li><a href="#experience">Experience</a></li>
         <li><a href="#education">Education</a></li>
+        <li><a href="#certifications">Certifications</a></li>
       </ul>
       <a class="btn btn--solid" href="Aban_Keot_Resume.pdf" download>Download Résumé</a>
     </div>
@@ -775,7 +809,97 @@
         </div>
       </div>
     </section>
+<section id="certifications">
+  <h2 class="section-title">Certifications</h2>
+  <div class="cert-grid">
 
+    <div class="cert-card">
+      <div class="org">EDUCBA · Coursera</div>
+      <p class="title">Bank Credit Analysis &amp; Portfolio Management</p>
+      <div class="date">Specialization · Jun 2026</div>
+      <div class="cert-actions">
+        <a href="certs/Bank_Credit_Analysis___Portfolio_Management_Coursera_9XLBFE9BQ8AB.pdf" download class="primary">Download PDF</a>
+        <a href="https://coursera.org/verify/specialization/9XLBFE9BQ8AB" target="_blank" rel="noopener">Verify →</a>
+      </div>
+    </div>
+
+    <div class="cert-card">
+      <div class="org">EDUCBA · Coursera</div>
+      <p class="title">Analyze &amp; Evaluate Credit Risk, NPA &amp; Recovery Frameworks</p>
+      <div class="date">Course · Jun 2026</div>
+      <div class="cert-actions">
+        <a href="certs/Coursera_-_Credit_Risk___Analysis.pdf" download class="primary">Download PDF</a>
+        <a href="https://coursera.org/verify/TPKZL29PFAGU" target="_blank" rel="noopener">Verify →</a>
+      </div>
+    </div>
+
+    <div class="cert-card">
+      <div class="org">Goldman Sachs · Forage</div>
+      <p class="title">Risk Job Simulation</p>
+      <div class="date">Certificate of Completion · Mar 2026</div>
+      <div class="cert-actions">
+        <a href="certs/risk_certificate.pdf" download class="primary">Download PDF</a>
+      </div>
+    </div>
+
+    <div class="cert-card">
+      <div class="org">Citi · Forage</div>
+      <p class="title">Investment Banking Job Simulation</p>
+      <div class="date">Certificate of Completion · Jan 2026</div>
+      <div class="cert-actions">
+        <a href="certs/Investment_banking_citibank.pdf" download class="primary">Download PDF</a>
+      </div>
+    </div>
+
+    <div class="cert-card">
+      <div class="org">Fidelity International · Forage</div>
+      <p class="title">Investment Management Job Simulation</p>
+      <div class="date">Certificate of Completion · Oct 2025</div>
+      <div class="cert-actions">
+        <a href="certs/Investment_management_job_simulation.pdf" download class="primary">Download PDF</a>
+      </div>
+    </div>
+
+    <div class="cert-card">
+      <div class="org">J.P. Morgan Chase · Forage</div>
+      <p class="title">Commercial Banking Job Simulation</p>
+      <div class="date">Certificate of Completion · Apr 2024</div>
+      <div class="cert-actions">
+        <a href="certs/jp_morgan_cetificate.pdf" download class="primary">Download PDF</a>
+      </div>
+    </div>
+
+    <div class="cert-card">
+      <div class="org">HSBC · Forage</div>
+      <p class="title">Wealth and Personal Banking Job Simulation</p>
+      <div class="date">Certificate of Completion · Apr 2024</div>
+      <div class="cert-actions">
+        <a href="certs/HSBC_Certificate.pdf" download class="primary">Download PDF</a>
+      </div>
+    </div>
+
+    <div class="cert-card">
+      <div class="org">Christ University · SWAYAM</div>
+      <p class="title">GST Certification</p>
+      <div class="date">Score: 84.2% · Jan 2026</div>
+      <div class="cert-actions">
+        <a href="certs/Swayam_GST_Certificate.pdf" download class="primary">Download PDF</a>
+        <a href="https://swayam.gov.in/" target="_blank" rel="noopener">Verify →</a>
+      </div>
+    </div>
+
+    <div class="cert-card">
+      <div class="org">Infosys Springboard</div>
+      <p class="title">Banking Operations</p>
+      <div class="date">Course Completion · May 2024</div>
+      <div class="cert-actions">
+        <a href="certs/infosys_Banking_Operations.pdf" download class="primary">Download PDF</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+    
   </main>
 
   <footer class="wrap">
